@@ -64,7 +64,7 @@ def main():
 
 
 def decode_password(password, salt):
-    """Decode hash password"""
+    """compare hash password if match"""
     # Hash the input data using the same hash function used to generate the known hash
     salted_password = salt + password
     hash_object = hashlib.sha256(salted_password.encode()).hexdigest()
