@@ -32,6 +32,18 @@ MINIMUM_LENGTH_OF_PASSWORD = 8
 MAXIMUM_LENGTH_OF_PASSWORD = 20
 
 
+def decode_password(password):
+    """Decode hash password"""
+    # Hash the input data using the same hash function used to generate the known hash
+    hashed_input = hashlib.sha256(password.encode()).hexdigest()
+
+    # Compare the computed hash with the known hash
+    if hashed_input == password:
+        print("Hashes match! The input data matches the known hash.")
+    else:
+        print("Hashes do not match. The input data does not match the known hash.")
+
+
 def main():
     # valid_characters = VALID_CHARACTERS.split()
     # special_characters = SPECIAL_CHARACTERS.split()
@@ -59,6 +71,7 @@ def main():
 
     valid_password = hash_password(valid_password, salt_password())
     print(valid_password)
+    print(decode_password(valid_password))
     export_password(username, valid_password)
 
 
@@ -113,5 +126,3 @@ def export_password(username, password):
 
 
 main()
-
-# Kept you waiting huh, - Snake
