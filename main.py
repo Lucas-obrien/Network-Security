@@ -56,17 +56,18 @@ def main():
         print('Invalid Password!\n', REQUIREMENTS)
         valid_password = input("Please enter a password: ")
     print(valid_password)
-
-    valid_password = hash_password(valid_password, salt_password())
+    salt = salt_password()
+    valid_password = hash_password(valid_password, salt)
     print(valid_password)
-    print(decode_password(valid_password, salt_password()))
+    print(compare_password(valid_password, salt))
     export_password(username, valid_password)
 
 
-def decode_password(password, salt):
+def compare_password(password, salt):
     """compare hash password if match"""
+    # password = "hello"
     # Hash the input data using the same hash function used to generate the known hash
-    salted_password = salt + password
+    salted_password = salt + "abcABC123!"
     hash_object = hashlib.sha256(salted_password.encode()).hexdigest()
 
     # Compare the computed hash with the known hash
